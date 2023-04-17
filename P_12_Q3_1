@@ -1,0 +1,39 @@
+clear;
+close all;
+
+b0 = 1;
+b1 = -2*cos(0.44*pi)-2*cos(0.7*pi);
+b2 = 1 + 4*cos(0.44*pi)*cos(0.7*pi);
+b3 = -2*cos(0.44*pi)-2*cos(0.7*pi);
+b4 = 1;
+
+coeff = [b0,b1,b2,b3,b4];
+
+%% Part B
+n = 0:149;
+
+xn = 5*cos(0.3*pi.*n)+22*cos((0.44*pi.*n)-(pi/3))+22*cos((0.7*pi.*n)-(pi/4));
+
+
+%% Part C
+filt = conv(xn, coeff);
+
+w = -pi:(pi/100):pi;
+figure(1);
+H = freqz(coeff, 1, w);
+plot(w, abs(H));
+title('Frequency Response of Cascaded Filter');
+
+
+%% Part D
+
+filtered_40 = filt(1:40);
+
+figure(2);
+plot(abs(filtered_40));
+
+figure(3);
+plot(angle(filtered_40));
+
+
+
