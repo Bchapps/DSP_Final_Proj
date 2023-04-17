@@ -1,7 +1,7 @@
 
 L = 10; %Length of filter
 wc = 0.44*pi; %center frequency
-HH = passband(L,wc);
+HH = passband(L,wc); %calls function that finds the freq response
 
 %find the max gain
 Hmax = max(abs(HH));
@@ -31,7 +31,7 @@ plot(ww, angle(HH))
 xlabel("Normalized Radian Frequency");
 
 L2 = 20; %Length of filter
-HH2 = passband(L2,wc);
+HH2 = passband(L2,wc); %calls function that finds the freq response
 
 %find the max gain
 Hmax2 = max(abs(HH2));
@@ -61,7 +61,7 @@ xlabel("Normalized Radian Frequency");
 xlabel("Normalized Radian Frequency");
 
 L3 = 40; %Length of filter
-HH3 = passband(L3,wc);
+HH3 = passband(L3,wc); %calls function that finds the freq response
 
 %find the max gain
 Hmax3 = max(abs(HH3));
