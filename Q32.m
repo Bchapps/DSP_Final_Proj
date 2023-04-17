@@ -73,34 +73,22 @@ fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found3), ', ')
 
 %B) cont. Plot Freq response for L = 10, L = 20, L = 40
 figure(1)
-subplot(2,1,1);
 plot(ww, abs(HH))
 xlabel("Normalized Radian Frequency");
 ylabel("Magnitude");
 title("Bandpass Filter (centered at 0.44*pi)");
-subplot(2,1,2);
-plot(ww, angle(HH))
-xlabel("Normalized Radian Frequency");
 
 figure(2)
-subplot(2,1,1);
 plot(ww, abs(HH2))
 xlabel("Normalized Radian Frequency");
 ylabel("Magnitude");
 title("Bandpass Filter (centered at 0.44*pi)");
-subplot(2,1,2);
-plot(ww, angle(HH2))
-xlabel("Normalized Radian Frequency");
 
 figure(3)
-subplot(2,1,1);
 plot(ww, abs(HH3))
 xlabel("Normalized Radian Frequency");
 ylabel("Magnitude");
 title("Bandpass Filter (centered at 0.44*pi)");
-subplot(2,1,2);
-plot(ww, angle(HH3))
-xlabel("Normalized Radian Frequency");
 
 %% c) 
 %When the length of the filter is 10 the gain at wc = 0.548 dB and at 
@@ -115,6 +103,9 @@ xlabel("Normalized Radian Frequency");
 
 %Function that calculates the Frequency response at different lengths
 %for a bandpass filter, at different center frequencies
+
+%% D)
+
 function [frequencyResponse] = passband(length,centerFreq)
 L = length; %Length of filter
 n = 0:L-1; % 0<= n < L
