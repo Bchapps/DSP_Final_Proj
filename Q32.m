@@ -4,6 +4,7 @@
 L = 10; %Length of filter
 wc = 0.44*pi; %center frequency
 HH = passband(L,wc);
+ww = 0:0.001*pi:pi;
 
 %find the max gain
 Hmax = max(abs(HH));
@@ -104,7 +105,32 @@ title("Bandpass Filter (centered at 0.44*pi)");
 %Function that calculates the Frequency response at different lengths
 %for a bandpass filter, at different center frequencies
 
-%% D)
+%% D) p1
+gain = 1;
+gg = 0.1;
+Length = 20;
+while gain < gg
+   i =10;
+   Length = Length + i;
+   HH4 = passband(Length,wc);
+   gain24 = abs(HH4(301));
+   gain = gain24/gain2;
+end
+
+%% D) p2
+
+gains = 1;
+
+Lengthn = 5;
+while gain < 0.1
+   i =10;
+   Lengthn = Lengthn + i;
+   HH5 = passband(Lengthn,wc);
+   gain24 = abs(HH5(701));
+   gains = gain35/gain3;
+end
+
+fprintf('Length where w =0.7pi < 10%  %s\n', join(string(Lengthn), ', '));
 
 function [frequencyResponse] = passband(length,centerFreq)
 L = length; %Length of filter
