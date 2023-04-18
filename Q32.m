@@ -1,3 +1,5 @@
+clear;
+close all;
 %% 3.2 Simple Bandpass Filter
 
 %% a) Length = 10
@@ -107,30 +109,45 @@ title("Bandpass Filter (centered at 0.44*pi)");
 
 %% D) p1
 gain = 1;
-gg = 0.1;
-Length = 20;
-while gain < gg
-   i =10;
+Length = 10;
+while gain > 0.1
+   i =1;
    Length = Length + i;
    HH4 = passband(Length,wc);
    gain24 = abs(HH4(301));
    gain = gain24/gain2;
 end
-
+disp(Length);
 %% D) p2
 
 gains = 1;
-
-Lengthn = 5;
-while gain < 0.1
-   i =10;
-   Lengthn = Lengthn + i;
-   HH5 = passband(Lengthn,wc);
-   gain24 = abs(HH5(701));
+Length2 = 10;
+while gains > 0.1
+   i =1;
+   Length2 = Length2 + i;
+   HH5 = passband(Length2,wc);
+   gain35 = abs(HH5(701));
    gains = gain35/gain3;
 end
 
-fprintf('Length where w =0.7pi < 10%  %s\n', join(string(Lengthn), ', '));
+disp(Length2);
+
+
+%% E) 
+nn = 0:1:100;
+xn = 5*cos(0.3*pi.*nn)+22*cos((0.44*pi.*nn)-(pi/3))+22*cos((0.7*pi.*nn)-(pi/4));
+plot(nn, xn);
+
+bandpass = 1/L.*cos(wc.*nn); %passband filte
+output = bandpass.*xn;
+
+plot(nn, output);
+
+%% F) 
+
+response = freqz(output, 1, ww);
+
+plot(ww, abs(response));
 
 function [frequencyResponse] = passband(length,centerFreq)
 L = length; %Length of filter
