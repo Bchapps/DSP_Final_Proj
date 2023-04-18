@@ -1,6 +1,8 @@
 clear;
 close all;
-%% 3.2 Simple Bandpass Filter
+clc;
+%% 3.2 Simple Bandpass Filter -- Group 4
+% Braxton Chappell, Emma Dingman, Marlo Esperson, Sam Hansen
 
 %% a) Length = 10
 L = 10; %Length of filter
@@ -16,12 +18,9 @@ w2 = 0.3*pi;
 w3 = 0.7*pi;
 
 %finding gain at the specified places
-gain1 = abs(HH(441));
-fprintf('Gain at w1=%g: %g\n', w1, gain1);
-gain2 = abs(HH(301));
-fprintf('Gain at w1=%g: %g\n', w2, gain2);
-gain3 = abs(HH(701));
-fprintf('Gain at w1=%g: %g\n', w3, gain3);
+fprintf('Gain at w1=%g: %g\n', w1, abs(HH(441)));
+fprintf('Gain at w1=%g: %g\n', w2, abs(HH(301)));
+fprintf('Gain at w1=%g: %g\n', w3, abs(HH(701)));
 
 %% B) Find w where H > 0.707*Hmax 
 %find all locations that have a gain > 0.707*Hmac
@@ -40,12 +39,9 @@ Hmax2 = max(abs(HH2));
 
 
 %finding gain at the specified places
-gain12 = abs(HH2(441));
-fprintf('Gain at w1=%g: %g\n', w1, gain12);
-gain22 = abs(HH2(301));
-fprintf('Gain at w1=%g: %g\n', w2, gain22);
-gain32 = abs(HH2(701));
-fprintf('Gain at w1=%g: %g\n', w3, gain32);
+fprintf('Gain at w1=%g: %g\n', w1, abs(HH2(441)));
+fprintf('Gain at w1=%g: %g\n', w2, abs(HH2(301)));
+fprintf('Gain at w1=%g: %g\n', w3, abs(HH2(701)));
 
 %find all locations that have a gain > 0.707*Hmac
 locations2 = find(abs(HH2) > 0.707*Hmax2);
@@ -62,12 +58,9 @@ Hmax3 = max(abs(HH3));
 
 
 %finding gain at the specified places
-gain13 = abs(HH3(441));
-fprintf('Gain at w1=%g: %g\n', w1, gain13);
-gain23 = abs(HH3(301));
-fprintf('Gain at w1=%g: %g\n', w2, gain23);
-gain33 = abs(HH3(701));
-fprintf('Gain at w1=%g: %g\n', w3, gain33);
+fprintf('Gain at w1=%g: %g\n', w1, abs(HH3(441)));
+fprintf('Gain at w1=%g: %g\n', w2, abs(HH3(301)));
+fprintf('Gain at w1=%g: %g\n', w3, abs(HH3(701)));
 
 %find all locations that have a gain > 0.707*Hmac
 locations3 = find(abs(HH3) > 0.707*Hmax3);
@@ -114,8 +107,7 @@ while gain > 0.1
    i =1;
    Length = Length + i;
    HH4 = passband(Length,wc);
-   gain24 = abs(HH4(301));
-   gain = gain24/gain2;
+   gain = abs(HH4(301))/abs(HH(301));
 end
 disp(Length);
 %% D) p2
@@ -126,8 +118,7 @@ while gains > 0.1
    i =1;
    Length2 = Length2 + i;
    HH5 = passband(Length2,wc);
-   gain35 = abs(HH5(701));
-   gains = gain35/gain3;
+   gains = abs(HH5(701))/abs(HH(701));
 end
 
 disp(Length2);
@@ -135,19 +126,27 @@ disp(Length2);
 
 %% E) 
 nn = 0:1:100;
+%sinusiod from 3.1
 xn = 5*cos(0.3*pi.*nn)+22*cos((0.44*pi.*nn)-(pi/3))+22*cos((0.7*pi.*nn)-(pi/4));
+figure(4)
+subplot(2,1,1);
 plot(nn, xn);
+title('Input');
 
-bandpass = 1/L.*cos(wc.*nn); %passband filte
+bandpass = 1/L.*cos(wc.*nn); %passband filter
 output = bandpass.*xn;
-
+subplot(2,1,2);
 plot(nn, output);
+title('Output');
 
 %% F) 
-
 response = freqz(output, 1, ww);
-
+figure(6)
 plot(ww, abs(response));
+title('Frequency Response of Output');
+xlabel('Normalized Radial Frequency');
+ylabel('Magnitude');
+
 
 function [frequencyResponse] = passband(length,centerFreq)
 L = length; %Length of filter
