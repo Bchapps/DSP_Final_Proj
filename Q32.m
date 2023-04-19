@@ -126,7 +126,7 @@ disp(Length2);
 
 %% E) 
 nn = 0:1:100;
-%sinusiod from 3.1
+%sinusoid
 xn = 5*cos(0.3*pi.*nn)+22*cos((0.44*pi.*nn)-(pi/3))+22*cos((0.7*pi.*nn)-(pi/4));
 figure(4)
 subplot(2,1,1);
@@ -134,9 +134,11 @@ plot(nn, xn);
 title('Input');
 
 bandpass = 1/L.*cos(wc.*nn); %passband filter
-output = bandpass.*xn;
+
+output = conv(xn, bandpass);
+
 subplot(2,1,2);
-plot(nn, output);
+plot(nn,output(50:150));
 title('Output');
 
 %% F) 
