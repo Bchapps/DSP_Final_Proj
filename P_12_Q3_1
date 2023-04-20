@@ -1,13 +1,22 @@
 clear;
 close all;
 
-b0 = 1;
-b1 = -2*cos(0.44*pi)-2*cos(0.7*pi);
-b2 = 1 + 4*cos(0.44*pi)*cos(0.7*pi);
-b3 = -2*cos(0.44*pi)-2*cos(0.7*pi);
-b4 = 1;
+%% Part A
+omega1 = 0.44 * pi;
+omega2 = 0.7 * pi;
 
-coeff = [b0,b1,b2,b3,b4];
+b0 = 1; 
+b1 = -2*cos(omega1);
+b2 = 1;
+
+b3 = 1; 
+b4 = -2*cos(omega2);
+b5 = 1;
+
+coeff1 = [b0, b1, b2];
+coeff2 = [b3, b4, b5];
+
+Cascaded_filter = conv(coeff1, coeff2);
 
 %% Part B
 n = 0:149;
@@ -16,24 +25,54 @@ xn = 5*cos(0.3*pi.*n)+22*cos((0.44*pi.*n)-(pi/3))+22*cos((0.7*pi.*n)-(pi/4));
 
 
 %% Part C
-filt = conv(xn, coeff);
+filtered_signal = conv(xn, Cascaded_filter);
 
 w = -pi:(pi/100):pi;
 figure(1);
-H = freqz(coeff, 1, w);
+H = freqz(Cascaded_filter, 1, w);
 plot(w, abs(H));
 title('Frequency Response of Cascaded Filter');
 
 
-%% Part D
 
-filtered_40 = filt(1:40);
+
+%%
+
+
+%% Part d
+% Because, theoretically, the two other cosine waves in the signal got
+% ellimiated out, the resulting signal should be the other cosine wave that
+% doesnt have a fundamental frequency within that bandwidth. 
 
 figure(2);
-plot(abs(filtered_40));
+plot(filtered_signal(1:40));
+title('First 40 points of Filtered Signal');
+
+n_hand = [5:40];
+x_hand = 5*cos(0.3*pi*n_hand);
+
+%% part e
 
 figure(3);
-plot(angle(filtered_40));
+subplot(2,1,1);
+plot(x_hand);
+title('Hand Filtered Output Signal');
+subplot(2,1,2);
+plot(filtered_signal(5:40));
+title('Designed Filter Filtered Signal');
 
+% They aren't exactly alligned, but the shape is almost exactly the same. 
+
+%% Part f
+% The output signal is different for the first 5 points because it takes
+% that many points for the filter to be fully incorporated within the
+% signal. If the filter is designed by hand, the polynomial will have the
+% lowest order of z^-4, or five terms. Once the fifth term is integrated
+% into the signal, it can behave properly. 
+
+%% Bonus
+% I wanted to include a spectrogram as well to show the frequency used. 
+figure(4);
+spectrogram(filtered_signal);
 
 
