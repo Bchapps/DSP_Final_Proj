@@ -4,7 +4,7 @@
 ## About the Project:
 ## Getting Started:
 ### Installation
-
+The programs and files in this repository are intended to be run in Matlab. Ensure that all files downloaded in this repository are within the user's "Current Folder" in the Matlab environment.
 ## Frequency Response: Bandpass and Nulling Filters: Lab P-12 -- 3 Lab Exercise
 ### Nulling Filters for Rejection: 3.1
 
@@ -14,3 +14,30 @@
 
 ## DLTI GUI and Nulling Filters: Lab S-5 -- 2 Lab Exercise
 ### Removing Interference from a Speech Signal: 2.3
+The purpose of this exercise was to design and use an FIR nulling filter to remove two very large amplitude sinusoids at 1555 Hz and 2222 Hz from a given desired speech signal file, "xxbad".
+
+**Filter design**
+
+A cascaded nulling FIR filter was the chosen design for this project. Each of the two cascaded filters nulls one of the two large amplitude sinusoids. They are then cascaded into one equivalent filter. The process of solving for the coefficients of a single second-order FIR filter is shown below:
+
+y[n] = b<sub>0</sub>x[n] + b<sub>1</sub>x[n-1] + b<sub>2</sub>x[n-2]
+
+H(e<sup>jomega</sup>) = b<sub>0</sub> + b<sub>1</sub>e<sup>-jomega</sup> + b<sub>2</sub>e<sup>-2j*omega</sup>
+  where omega is the one of the large amplitude sinusoids normalized by the sampling frequency.
+
+We want this response to go to zero at the unwanted frequencies (omega), so we can solve as follows:
+
+b<sub>0</sub> + b<sub>1</sub>cos(omega) + b<sub>2</sub>cos(2omega) - j(b<sub>1</sub>sin(omega) + b<sub>2</sub>sin(omega)) = 0
+
+**....**
+
+After some solving, we get:
+
+b<sub>1</sub> = -2b<sub>2</sub>cos(omega) and b<sub>0</sub> = b<sub>2</sub>
+
+Our coefficients are then represented as shown below:
+
+h[n] = {b<sub>0</sub>, -2b<sub>0</sub>cos(omega), b<sub>0</sub>} where  b<sub>0</sub> = 1
+
+
+In the program, six coefficients exist to represent the two FIR nulling filters that cancel out the two large sinusoids. These coefficients are then convolved together, and the convolved coefficients are then convolved with the initial distorted signal. They are passed into a frequency response vector. When this program plays, the initial distorted audio signal will play. After a built-in delay of 4 seconds, the filtered audio signal will play.
