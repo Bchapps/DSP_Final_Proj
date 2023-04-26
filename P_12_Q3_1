@@ -24,7 +24,10 @@ n = 0:149;
 xn = 5*cos(0.3*pi.*n)+22*cos((0.44*pi.*n)-(pi/3))+22*cos((0.7*pi.*n)-(pi/4));
 
 figure(1);
-plot(xn);
+plot(xn(1:40));
+title('First 40 Unfiltered Points', 'FontSize', 14)
+xlabel('Time Domain', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
 
 %% Part C
 filtered_signal = conv(xn, Cascaded_filter);
@@ -52,7 +55,7 @@ figure(3);
 plot(filtered_signal(1:40));
 title('First 40 points of Filtered Signal', 'FontSize', 14);
 ylabel('Magnitude', 'FontSize', 14);
-xlabel('Time Domain', 'FontSize', 14)
+xlabel('Time Domain', 'FontSize', 14);
 
 n_hand = [5:40];
 x_hand = 5*cos(0.3*pi*n_hand);
