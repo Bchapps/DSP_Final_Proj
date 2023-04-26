@@ -23,15 +23,19 @@ n = 0:149;
 
 xn = 5*cos(0.3*pi.*n)+22*cos((0.44*pi.*n)-(pi/3))+22*cos((0.7*pi.*n)-(pi/4));
 
+figure(1);
+plot(xn);
 
 %% Part C
 filtered_signal = conv(xn, Cascaded_filter);
 
 w = -pi:(pi/100):pi;
-figure(1);
+figure(2);
 H = freqz(Cascaded_filter, 1, w);
 plot(w, abs(H));
-title('Frequency Response of Cascaded Filter');
+title('Frequency Response of Cascaded Filter', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
+xlabel('Normalized Frequency', 'FontSize', 14)
 
 
 
@@ -44,22 +48,24 @@ title('Frequency Response of Cascaded Filter');
 % ellimiated out, the resulting signal should be the other cosine wave that
 % doesnt have a fundamental frequency within that bandwidth. 
 
-figure(2);
+figure(3);
 plot(filtered_signal(1:40));
-title('First 40 points of Filtered Signal');
+title('First 40 points of Filtered Signal', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
+xlabel('Time Domain', 'FontSize', 14)
 
 n_hand = [5:40];
 x_hand = 5*cos(0.3*pi*n_hand);
 
 %% part e
 
-figure(3);
+figure(4);
 subplot(2,1,1);
 plot(x_hand);
-title('Hand Filtered Output Signal');
+title('Hand Filtered Output Signal', 'FontSize', 14);
 subplot(2,1,2);
 plot(filtered_signal(5:40));
-title('Designed Filter Filtered Signal');
+title('Designed Filter Filtered Signal', 'FontSize', 14);
 
 % They aren't exactly alligned, but the shape is almost exactly the same. 
 
@@ -72,7 +78,8 @@ title('Designed Filter Filtered Signal');
 
 %% Bonus
 % I wanted to include a spectrogram as well to show the frequency used. 
-figure(4);
+figure(5);
 spectrogram(filtered_signal);
-
-
+title('Concentration of Frequencies', 'FontSize', 14);
+xlabel('Normalized Frequencies', 'FontSize', 14);
+ylabel('Signal in Time Domain', 'FontSize', 14);
