@@ -86,3 +86,11 @@ spectrogram(filtered_signal);
 title('Concentration of Frequencies', 'FontSize', 14);
 xlabel('Normalized Frequencies', 'FontSize', 14);
 ylabel('Signal in Time Domain', 'FontSize', 14);
+
+% Frequency Response of input signal
+ww = 0:pi/100:pi;
+figure(5);
+plot(ww, abs(freqz(xn,1,ww)));
+xlabel('Normalized Frequency', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
+title('Frequency Components','FontSize', 14);
