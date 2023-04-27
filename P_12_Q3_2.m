@@ -70,21 +70,21 @@ fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found3), ', ')
 %B) cont. Plot Freq response for L = 10, L = 20, L = 40
 figure(1)
 plot(ww, abs(HH))
-xlabel("Normalized Radian Frequency");
-ylabel("Magnitude");
-title("Bandpass Filter (centered at 0.44*pi)");
+xlabel("Normalized Radian Frequency", 'FontSize', 14);
+ylabel("Magnitude", 'FontSize', 14);
+title("Bandpass Filter (centered at 0.44*pi)", 'FontSize', 14);
 
 figure(2)
 plot(ww, abs(HH2))
-xlabel("Normalized Radian Frequency");
-ylabel("Magnitude");
-title("Bandpass Filter (centered at 0.44*pi)");
+xlabel("Normalized Radian Frequency", 'FontSize', 14);
+ylabel("Magnitude", 'FontSize', 14);
+title("Bandpass Filter (centered at 0.44*pi)", 'FontSize', 14);
 
 figure(3)
 plot(ww, abs(HH3))
-xlabel("Normalized Radian Frequency");
-ylabel("Magnitude");
-title("Bandpass Filter (centered at 0.44*pi)");
+xlabel("Normalized Radian Frequency", 'FontSize', 14);
+ylabel("Magnitude", 'FontSize', 14);
+title("Bandpass Filter (centered at 0.44*pi)", 'FontSize', 14);
 
 %% c) Comment on the selectivity when L = 10
 %When the length of the filter is 10 the gain at wc = 0.548 dB and at 
@@ -129,15 +129,15 @@ xn = 5*cos(0.3*pi.*nn)+22*cos((0.44*pi.*nn)-(pi/3))+22*cos((0.7*pi.*nn)-(pi/4));
 figure(4)
 subplot(2,1,1);
 plot(nn, xn);
-title('Input');
+title('Input', 'FontSize', 14);
 
-bandpass = 1/L2.*cos(wc.*nn); %passband filter
+bandpass = 2/L2.*cos(wc.*nn); %passband filter
 
 output = conv(xn, bandpass);
 
 subplot(2,1,2);
 plot(nn,output(50:150));
-title('Output');
+title('Output', 'FontSize', 14);
 
 %The sum of sinusiods is made up of 3 frequency components one at 0.3pi,
 %0.44pi, and 0.7pi. This filter applied is a bandpass filter with the
@@ -149,9 +149,9 @@ title('Output');
 response = freqz(output, 1, ww);
 figure(6)
 plot(ww, abs(response));
-title('Frequency Response of Output');
-xlabel('Normalized Radial Frequency');
-ylabel('Magnitude');
+title('Frequency Response of Output', 'FontSize', 14);
+xlabel('Normalized Radial Frequency', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
 
 %Function that calculates the Frequency response at different lengths
 %for a bandpass filter, at different center frequencies
@@ -159,9 +159,10 @@ function [frequencyResponse] = passband(length,centerFreq)
 L = length; %Length of filter
 n = 0:L-1; % 0<= n < L
 wc = centerFreq; %center frequency
-hn = 1/L.*cos(wc.*n); %passband filte
+hn = 2/L.*cos(wc.*n); %passband filte
 
 ww = 0:0.001*pi:pi;
 frequencyResponse = freqz(hn, 1, ww);
 
 end
+
