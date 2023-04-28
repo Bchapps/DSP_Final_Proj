@@ -46,3 +46,6 @@ h[n] = {b<sub>0</sub>, -2b<sub>0</sub>cos(omega), b<sub>0</sub>} where  b<sub>0<
 
 
 In the program, six coefficients exist to represent the two FIR nulling filters that cancel out the two large sinusoids. These coefficients are then convolved together, and the convolved coefficients are then convolved with the initial distorted signal. They are passed into a frequency response vector. When this program plays, the initial distorted audio signal will play. After a built-in delay of 4 seconds, the filtered audio signal will play.
+
+
+RUNNING THE Q2_3final.m VERSION OF THIS QUESTION SHOULD RUN WITH NO FURTHER INSTRUCTION REQUIRED. THE ONLY OPPORTUNITY FOR IT TO NOT RUN AS DESIGNED IS IF THE SOUND FILE DOESN'T GET LOADED IN PROPERLY. THE CODE IS DESIGNED TO HAVE IT WITHIN THE SAME FOLDER AND SHOULD DOWNLOAD THAT WAY. 
