@@ -1,0 +1,231 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>P_12_Q3_1</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-04-28"><meta name="DC.source" content="P_12_Q3_1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Lab P-12 Exercise 3.1 -- Nulling Filter</a></li><li><a href="#2">Part A</a></li><li><a href="#3">Part B</a></li><li><a href="#4">Part C</a></li><li><a href="#5">Part D</a></li><li><a href="#6">part E</a></li><li><a href="#7">Part F</a></li><li><a href="#8">Bonus</a></li></ul></div><h2 id="1">Lab P-12 Exercise 3.1 -- Nulling Filter</h2><p>Group 4 - Braxton Chappell, Emma Dingman, Marlo Esperson, Sam Hansen</p><pre class="codeinput">clear;
+close <span class="string">all</span>;
+</pre><h2 id="2">Part A</h2><p>This portion is setting up the coefficients for the two nulling filters that are used. These nullinig filters then get cascaded to create one nulling filter that filters out the frequencies 0.44pi and 0.7pi.</p><pre class="codeinput">omega1 = 0.44 * pi;
+omega2 = 0.7 * pi;
+
+b0 = 1;
+b1 = -2*cos(omega1);
+b2 = 1;
+
+b3 = 1;
+b4 = -2*cos(omega2);
+b5 = 1;
+
+coeff1 = [b0, b1, b2];
+coeff2 = [b3, b4, b5];
+
+Cascaded_filter = conv(coeff1, coeff2);
+
+<span class="comment">% ALSO INCLUDED is the frequency response of the designed filter. This is</span>
+<span class="comment">% to visually confirmt he success of the design.</span>
+w = -pi:(pi/100):pi;
+figure(1);
+H = freqz(Cascaded_filter, 1, w);
+plot(w, abs(H));
+title(<span class="string">'Frequency Response of Cascaded Filter'</span>, <span class="string">'FontSize'</span>, 14);
+ylabel(<span class="string">'Magnitude'</span>, <span class="string">'FontSize'</span>, 14);
+xlabel(<span class="string">'Normalized Frequency'</span>, <span class="string">'FontSize'</span>, 14)
+</pre><img vspace="5" hspace="5" src="P_12_Q3_1_01.png" alt=""> <h2 id="3">Part B</h2><p>Part B generates a signal in the time domain. It asks for 150 samples. I plot it for visualization and comparison for future questions.</p><pre class="codeinput">n = 0:149;
+
+xn = 5*cos(0.3*pi.*n)+22*cos((0.44*pi.*n)-(pi/3))+22*cos((0.7*pi.*n)-(pi/4));
+
+figure(2);
+plot(xn(1:40));
+title(<span class="string">'First 40 Unfiltered Points'</span>, <span class="string">'FontSize'</span>, 14)
+xlabel(<span class="string">'Time Domain'</span>, <span class="string">'FontSize'</span>, 14);
+ylabel(<span class="string">'Magnitude'</span>, <span class="string">'FontSize'</span>, 14);
+</pre><img vspace="5" hspace="5" src="P_12_Q3_1_02.png" alt=""> <h2 id="4">Part C</h2><p>The filter designed in part A and the signal generated in part B is convolved to filter out the sinusoids that we want.</p><pre class="codeinput">filtered_signal = conv(xn, Cascaded_filter);
+</pre><h2 id="5">Part D</h2><p>Because, theoretically, the two other cosine waves in the signal got ellimiated out, the resulting signal should be the other cosine wave that doesnt have a fundamental frequency within that bandwidth.</p><pre class="codeinput">figure(3);
+plot(filtered_signal(1:40));
+title(<span class="string">'First 40 points of Filtered Signal'</span>, <span class="string">'FontSize'</span>, 14);
+ylabel(<span class="string">'Magnitude'</span>, <span class="string">'FontSize'</span>, 14);
+xlabel(<span class="string">'Time Domain'</span>, <span class="string">'FontSize'</span>, 14);
+
+n_hand = [5:40];
+x_hand = 5*cos(0.3*pi*n_hand);
+</pre><img vspace="5" hspace="5" src="P_12_Q3_1_03.png" alt=""> <h2 id="6">part E</h2><p>Here the hand calculated and the filtered signal are compared.</p><pre class="codeinput">figure(4);
+subplot(2,1,1);
+plot(x_hand);
+title(<span class="string">'Hand Filtered Output Signal'</span>, <span class="string">'FontSize'</span>, 14);
+subplot(2,1,2);
+plot(filtered_signal(5:40));
+title(<span class="string">'Designed Filter Filtered Signal'</span>, <span class="string">'FontSize'</span>, 14);
+
+<span class="comment">% They aren't exactly alligned, but the shape is almost exactly the same.</span>
+</pre><img vspace="5" hspace="5" src="P_12_Q3_1_04.png" alt=""> <h2 id="7">Part F</h2><p>The output signal is different for the first 5 points because it takes that many points for the filter to be fully incorporated within the signal. If the filter is designed by hand, the polynomial will have the lowest order of z^-4, or five terms. Once the fifth term is integrated into the signal, it can behave properly.</p><h2 id="8">Bonus</h2><p>I wanted to include a spectrogram as well to show the frequency used.</p><pre class="codeinput">figure(5);
+spectrogram(filtered_signal);
+title(<span class="string">'Concentration of Frequencies'</span>, <span class="string">'FontSize'</span>, 14);
+xlabel(<span class="string">'Normalized Frequencies'</span>, <span class="string">'FontSize'</span>, 14);
+ylabel(<span class="string">'Signal in Time Domain'</span>, <span class="string">'FontSize'</span>, 14);
+</pre><img vspace="5" hspace="5" src="P_12_Q3_1_05.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Lab P-12 Exercise 3.1 REPLACE_WITH_DASH_DASH Nulling Filter
+% Group 4 - Braxton Chappell, Emma Dingman, Marlo Esperson, Sam Hansen 
+
+clear;
+close all;
+
+%% Part A
+% This portion is setting up the coefficients for the two nulling filters
+% that are used. These nullinig filters then get cascaded to create one
+% nulling filter that filters out the frequencies 0.44pi and 0.7pi. 
+omega1 = 0.44 * pi;
+omega2 = 0.7 * pi;
+
+b0 = 1; 
+b1 = -2*cos(omega1);
+b2 = 1;
+
+b3 = 1; 
+b4 = -2*cos(omega2);
+b5 = 1;
+
+coeff1 = [b0, b1, b2];
+coeff2 = [b3, b4, b5];
+
+Cascaded_filter = conv(coeff1, coeff2);
+
+% ALSO INCLUDED is the frequency response of the designed filter. This is
+% to visually confirmt he success of the design. 
+w = -pi:(pi/100):pi;
+figure(1);
+H = freqz(Cascaded_filter, 1, w);
+plot(w, abs(H));
+title('Frequency Response of Cascaded Filter', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
+xlabel('Normalized Frequency', 'FontSize', 14)
+
+%% Part B
+% Part B generates a signal in the time domain. It asks for 150 samples. I
+% plot it for visualization and comparison for future questions. 
+n = 0:149;
+
+xn = 5*cos(0.3*pi.*n)+22*cos((0.44*pi.*n)-(pi/3))+22*cos((0.7*pi.*n)-(pi/4));
+
+figure(2);
+plot(xn(1:40));
+title('First 40 Unfiltered Points', 'FontSize', 14)
+xlabel('Time Domain', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
+
+%% Part C
+% The filter designed in part A and the signal generated in part B is
+% convolved to filter out the sinusoids that we want. 
+
+
+filtered_signal = conv(xn, Cascaded_filter);
+
+
+%% Part D
+% Because, theoretically, the two other cosine waves in the signal got
+% ellimiated out, the resulting signal should be the other cosine wave that
+% doesnt have a fundamental frequency within that bandwidth. 
+
+figure(3);
+plot(filtered_signal(1:40));
+title('First 40 points of Filtered Signal', 'FontSize', 14);
+ylabel('Magnitude', 'FontSize', 14);
+xlabel('Time Domain', 'FontSize', 14);
+
+n_hand = [5:40];
+x_hand = 5*cos(0.3*pi*n_hand);
+
+%% part E
+% Here the hand calculated and the filtered signal are compared. 
+
+figure(4);
+subplot(2,1,1);
+plot(x_hand);
+title('Hand Filtered Output Signal', 'FontSize', 14);
+subplot(2,1,2);
+plot(filtered_signal(5:40));
+title('Designed Filter Filtered Signal', 'FontSize', 14);
+
+% They aren't exactly alligned, but the shape is almost exactly the same. 
+
+%% Part F
+% The output signal is different for the first 5 points because it takes
+% that many points for the filter to be fully incorporated within the
+% signal. If the filter is designed by hand, the polynomial will have the
+% lowest order of z^-4, or five terms. Once the fifth term is integrated
+% into the signal, it can behave properly. 
+
+%% Bonus
+% I wanted to include a spectrogram as well to show the frequency used. 
+figure(5);
+spectrogram(filtered_signal);
+title('Concentration of Frequencies', 'FontSize', 14);
+xlabel('Normalized Frequencies', 'FontSize', 14);
+ylabel('Signal in Time Domain', 'FontSize', 14);
+
+##### SOURCE END #####
+--></body></html>
