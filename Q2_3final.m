@@ -8,7 +8,7 @@ clc
 clear all
 close all
 
-load('DLTInulling\speechbad.mat', 'xxbad')
+load('speechbad.mat', 'xxbad')
 
 
 % Plot of initial data
