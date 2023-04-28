@@ -6,7 +6,12 @@
 ### Installation
 The programs and files in this repository are intended to be run in Matlab. Ensure that all files downloaded in this repository are within the user's "Current Folder" in the Matlab environment.
 ## Frequency Response: Bandpass and Nulling Filters: Lab P-12 -- 3 Lab Exercise
-### Nulling Filters for Rejection: 3.1
+### Nulling Filters for Rejection: 3.1 (P_12_Q3_1)
+A nulling filter is designed to null out frequencies of .44pi and .7pi. This is done by taking the coefficients of a simple nulling filter (1, 2*cos(omega), and 1) , and inputting the two frequencies desired to be nulled out in for omega. Now, there are two different nulling filters for two different frequencies. These filters are then cascaded to null both frequencies out. This is done by a convolution. 
+
+A unfiltered signal is genreated as "xn". This signal is put through the filter to filter out two of the three sinusoidal components in it. What is left over is just 5cos(0.3*pi) and that is what is displayed. 
+
+THIS FILE SHOULD RUN WITH NO FURTHER INSTRUCTION REQUIRED. AN HTML VIEW IS ALSO GENERATED IF RUNNING IT IS NOT DESIRED. 
 
 
 ### Simple Bandpass Filter Design: 3.2
