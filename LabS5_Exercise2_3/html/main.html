@@ -81,7 +81,7 @@ figure(1)
 spectrogram(xxbad)
 title(<span class="string">'Initial Spectrogram'</span>, <span class="string">'FontSize'</span>, 14)
 set(gca, <span class="string">'FontSize'</span>, 14)
-</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <h2 id="3">2.3b) Design a cascade of two FIR Nulling filters to remove the</h2><p>sinusoids completely. This can be accomplished by finding the numerical values of the filter coefficients for each second-order nulling filter. Combine the cascaded filters into one equivalent FIR filter, and give the filter coefficients of the equivalent filter.</p><pre class="codeinput">fs = 8000; <span class="comment">% Hz. Sampling rate</span>
+</pre><img vspace="5" hspace="5" src="./html/main_01.png" alt=""> <h2 id="3">2.3b) Design a cascade of two FIR Nulling filters to remove the</h2><p>sinusoids completely. This can be accomplished by finding the numerical values of the filter coefficients for each second-order nulling filter. Combine the cascaded filters into one equivalent FIR filter, and give the filter coefficients of the equivalent filter.</p><pre class="codeinput">fs = 8000; <span class="comment">% Hz. Sampling rate</span>
 amp1 = 1555; <span class="comment">% Hz. First large amplitude sinusoid.</span>
 amp2 = 2222; <span class="comment">% Hz. Second large amplitude sinusoid.</span>
 omega1 = (amp1/fs)*2*pi; <span class="comment">% Normalized frequency</span>
@@ -117,7 +117,7 @@ ylabel(<span class="string">'Magnitude'</span>, <span class="string">'FontSize'<
 <span class="comment">% c) The nulls are found at (1.7452, 0) and (1.2213, 0)</span>
 <span class="comment">% along with (-1.7452, 0) and (-1.2213, 0) which are consistent</span>
 <span class="comment">% the omega1 and omega2 values calculated in part b above.</span>
-</pre><img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="5">2.3d) Process xxbad through the nulling filters. Indicate where the</h2><p>nulls are found.</p><pre class="codeinput">figure(3) <span class="comment">% Extra graph to look at Audio Signal Frequency Response</span>
+</pre><img vspace="5" hspace="5" src="./html/main_02.png" alt=""> <h2 id="5">2.3d) Process xxbad through the nulling filters. Indicate where the</h2><p>nulls are found.</p><pre class="codeinput">figure(3) <span class="comment">% Extra graph to look at Audio Signal Frequency Response</span>
 H = freqz(filt, 1, w);
 A = freqz(xxbad, 1, w);
 plot(w, abs(H));
@@ -131,7 +131,7 @@ spectrogram(filt) <span class="comment">% Final Spectrogram. The two large sinus
 <span class="comment">%Spectrogram" and verify that the nulling filters operated correctly.</span>
 title(<span class="string">'Filtered Spectrogram'</span>, <span class="string">'FontSize'</span>, 14)
 set(gca, <span class="string">'FontSize'</span>, 14)
-</pre><img vspace="5" hspace="5" src="main_03.png" alt=""> <img vspace="5" hspace="5" src="main_04.png" alt=""> <h2 id="6">Extras: Final filtered sound. Initial and final frequency response of audio</h2><pre class="codeinput">pause(4) <span class="comment">% 4 second delay so you can hear the before and after of the audio</span>
+</pre><img vspace="5" hspace="5" src="./html/main_03.png" alt=""> <img vspace="5" hspace="5" src="./html/main_04.png" alt=""> <h2 id="6">Extras: Final filtered sound. Initial and final frequency response of audio</h2><pre class="codeinput">pause(4) <span class="comment">% 4 second delay so you can hear the before and after of the audio</span>
 sound(filt) <span class="comment">% Final audio filtered through FIR filter.</span>
 
 figure(5)
@@ -152,7 +152,7 @@ ylabel(<span class="string">'Signal Magnitude'</span>, <span class="string">'Fon
 <span class="comment">%audiowrite('xxbad.wav', xxbad, fs)</span>
 
 <span class="comment">%audiowrite('filt.wav', filt, fs)</span>
-</pre><img vspace="5" hspace="5" src="main_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="./html/main_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 % Lab S-5 Problem 2.3 - Group 4
 % Removing Interference from a Speech Signal
