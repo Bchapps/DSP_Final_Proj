@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>main</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-05-01"><meta name="DC.source" content="main.m"><style type="text/css">
+      --><title>main</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-05-01"><meta name="DC.source" content="main.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -83,17 +83,18 @@ w2 = 0.3*pi;
 w3 = 0.7*pi;
 
 <span class="comment">%finding gain at the specified places</span>
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w1, abs(HH(441)));
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w2, abs(HH(301)));
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w3, abs(HH(701)));
-</pre><pre class="codeoutput">Gain at w1=1.3823: 1.09612
-Gain at w1=0.942478: 0.283624
-Gain at w1=2.19911: 0.28614
+fprintf(<span class="string">'Gain at 0.44pi: %g\n'</span>, abs(HH(441)));
+fprintf(<span class="string">'Gain at 0.3pi: %g\n'</span>, abs(HH(301)));
+fprintf(<span class="string">'Gain at 0.7pi: %g\n'</span>, abs(HH(701)));
+</pre><pre class="codeoutput">Gain at 0.44pi: 1.09612
+Gain at 0.3pi: 0.283624
+Gain at 0.7pi: 0.28614
 </pre><h2 id="4">B) Find the band width and repeat with L = 20, L = 40</h2><pre class="codeinput"><span class="comment">%find all locations that have a gain &gt; 0.707*Hmac</span>
 locations = find(abs(HH) &gt; 0.707*Hmax);
 found = ww(locations);
-fprintf(<span class="string">'Frequencies with abs(H) &gt; 0.707*Hmax: %s\n'</span>, join(string(found), <span class="string">', '</span>));
-
+<span class="comment">%fprintf('Frequencies with abs(H) &gt; 0.707*Hmax: %s\n', join(string(found), ', '));</span>
+bandw = found(end) - found(1);
+fprintf(<span class="string">'Bandwidth for L = 10: %g\n'</span>, bandw);
 
 <span class="comment">% B) cont. Repeat above for L = 20 and L = 40</span>
 
@@ -105,15 +106,18 @@ Hmax2 = max(abs(HH2));
 
 
 <span class="comment">%finding gain at the specified places</span>
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w1, abs(HH2(441)));
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w2, abs(HH2(301)));
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w3, abs(HH2(701)));
+fprintf(<span class="string">'\n'</span>);
+fprintf(<span class="string">'Gain at 0.44pi: %g\n'</span>, abs(HH2(441)));
+fprintf(<span class="string">'Gain at 0.3pi: %g\n'</span>, abs(HH2(301)));
+fprintf(<span class="string">'Gain at 0.7pi: %g\n'</span>, abs(HH2(701)));
+
 
 <span class="comment">%find all locations that have a gain &gt; 0.707*Hmac</span>
 locations2 = find(abs(HH2) &gt; 0.707*Hmax2);
 found2 = ww(locations2);
-fprintf(<span class="string">'Frequencies with abs(H) &gt; 0.707*Hmax: %s\n'</span>, join(string(found2), <span class="string">', '</span>));
-
+<span class="comment">%fprintf('Frequencies with abs(H) &gt; 0.707*Hmax: %s\n', join(string(found2), ', '));</span>
+bandw20 = found2(end) - found2(1);
+fprintf(<span class="string">'Bandwidth for L = 20: %g\n'</span>, bandw20);
 
 
 L3 = 40; <span class="comment">%Length of filter</span>
@@ -124,14 +128,18 @@ Hmax3 = max(abs(HH3));
 
 
 <span class="comment">%finding gain at the specified places</span>
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w1, abs(HH3(441)));
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w2, abs(HH3(301)));
-fprintf(<span class="string">'Gain at w1=%g: %g\n'</span>, w3, abs(HH3(701)));
+fprintf(<span class="string">'\n'</span>);
+fprintf(<span class="string">'Gain at 0.44pi: %g\n'</span>, abs(HH3(441)));
+fprintf(<span class="string">'Gain at 0.3pi: %g\n'</span>, abs(HH3(301)));
+fprintf(<span class="string">'Gain at 0.7pi: %g\n'</span>, abs(HH3(701)));
 
 <span class="comment">%find all locations that have a gain &gt; 0.707*Hmac</span>
 locations3 = find(abs(HH3) &gt; 0.707*Hmax3);
 found3 = ww(locations3);
-fprintf(<span class="string">'Frequencies with abs(H) &gt; 0.707*Hmax: %s\n'</span>, join(string(found3), <span class="string">', '</span>));
+<span class="comment">%fprintf('Frequencies with abs(H) &gt; 0.707*Hmax: %s\n', join(string(found3), ', '));</span>
+bandw40 = found3(end) - found3(1);
+fprintf(<span class="string">'Bandwidth for L = 40: %g\n'</span>, bandw40);
+fprintf(<span class="string">'\n'</span>);
 
 <span class="comment">%B) cont. Plot Freq response for L = 10, L = 20, L = 40</span>
 figure(1)
@@ -151,15 +159,18 @@ plot(ww, abs(HH3))
 xlabel(<span class="string">"Normalized Radian Frequency"</span>, <span class="string">'FontSize'</span>, 14);
 ylabel(<span class="string">"Magnitude"</span>, <span class="string">'FontSize'</span>, 14);
 title(<span class="string">"Bandpass Filter (centered at 0.44*pi)"</span>, <span class="string">'FontSize'</span>, 14);
-</pre><pre class="codeoutput">Frequencies with abs(H) &gt; 0.707*Hmax: 1.1404, 1.1435, 1.1467, 1.1498, 1.153, 1.1561, 1.1592, 1.1624, 1.1655, 1.1687, 1.1718, 1.175, 1.1781, 1.1812, 1.1844, 1.1875, 1.1907, 1.1938, 1.1969, 1.2001, 1.2032, 1.2064, 1.2095, 1.2127, 1.2158, 1.2189, 1.2221, 1.2252, 1.2284, 1.2315, 1.2346, 1.2378, 1.2409, 1.2441, 1.2472, 1.2504, 1.2535, 1.2566, 1.2598, 1.2629, 1.2661, 1.2692, 1.2723, 1.2755, 1.2786, 1.2818, 1.2849, 1.2881, 1.2912, 1.2943, 1.2975, 1.3006, 1.3038, 1.3069, 1.31, 1.3132, 1.3163, 1.3195, 1.3226, 1.3258, 1.3289, 1.332, 1.3352, 1.3383, 1.3415, 1.3446, 1.3477, 1.3509, 1.354, 1.3572, 1.3603, 1.3635, 1.3666, 1.3697, 1.3729, 1.376, 1.3792, 1.3823, 1.3854, 1.3886, 1.3917, 1.3949, 1.398, 1.4012, 1.4043, 1.4074, 1.4106, 1.4137, 1.4169, 1.42, 1.4231, 1.4263, 1.4294, 1.4326, 1.4357, 1.4388, 1.442, 1.4451, 1.4483, 1.4514, 1.4546, 1.4577, 1.4608, 1.464, 1.4671, 1.4703, 1.4734, 1.4765, 1.4797, 1.4828, 1.486, 1.4891, 1.4923, 1.4954, 1.4985, 1.5017, 1.5048, 1.508, 1.5111, 1.5142, 1.5174, 1.5205, 1.5237, 1.5268, 1.53, 1.5331, 1.5362, 1.5394, 1.5425, 1.5457, 1.5488, 1.5519, 1.5551, 1.5582, 1.5614, 1.5645, 1.5677, 1.5708, 1.5739, 1.5771, 1.5802, 1.5834, 1.5865, 1.5896, 1.5928, 1.5959, 1.5991, 1.6022, 1.6054, 1.6085, 1.6116, 1.6148, 1.6179, 1.6211, 1.6242, 1.6273, 1.6305, 1.6336, 1.6368, 1.6399, 1.6431, 1.6462, 1.6493
-Gain at w1=1.3823: 1.0131
-Gain at w1=0.942478: 0.244586
-Gain at w1=2.19911: 0.108364
-Frequencies with abs(H) &gt; 0.707*Hmax: 1.2409, 1.2441, 1.2472, 1.2504, 1.2535, 1.2566, 1.2598, 1.2629, 1.2661, 1.2692, 1.2723, 1.2755, 1.2786, 1.2818, 1.2849, 1.2881, 1.2912, 1.2943, 1.2975, 1.3006, 1.3038, 1.3069, 1.31, 1.3132, 1.3163, 1.3195, 1.3226, 1.3258, 1.3289, 1.332, 1.3352, 1.3383, 1.3415, 1.3446, 1.3477, 1.3509, 1.354, 1.3572, 1.3603, 1.3635, 1.3666, 1.3697, 1.3729, 1.376, 1.3792, 1.3823, 1.3854, 1.3886, 1.3917, 1.3949, 1.398, 1.4012, 1.4043, 1.4074, 1.4106, 1.4137, 1.4169, 1.42, 1.4231, 1.4263, 1.4294, 1.4326, 1.4357, 1.4388, 1.442, 1.4451, 1.4483, 1.4514, 1.4546, 1.4577, 1.4608, 1.464, 1.4671, 1.4703, 1.4734, 1.4765, 1.4797, 1.4828, 1.486, 1.4891, 1.4923, 1.4954, 1.4985, 1.5017, 1.5048, 1.508, 1.5111, 1.5142
-Gain at w1=1.3823: 1.02128
-Gain at w1=0.942478: 0.0538863
-Gain at w1=2.19911: 0.0507166
-Frequencies with abs(H) &gt; 0.707*Hmax: 1.3163, 1.3195, 1.3226, 1.3258, 1.3289, 1.332, 1.3352, 1.3383, 1.3415, 1.3446, 1.3477, 1.3509, 1.354, 1.3572, 1.3603, 1.3635, 1.3666, 1.3697, 1.3729, 1.376, 1.3792, 1.3823, 1.3854, 1.3886, 1.3917, 1.3949, 1.398, 1.4012, 1.4043, 1.4074, 1.4106, 1.4137, 1.4169, 1.42, 1.4231, 1.4263, 1.4294, 1.4326, 1.4357, 1.4388, 1.442, 1.4451, 1.4483
+</pre><pre class="codeoutput">Bandwidth for L = 10: 0.508938
+
+Gain at 0.44pi: 1.0131
+Gain at 0.3pi: 0.244586
+Gain at 0.7pi: 0.108364
+Bandwidth for L = 20: 0.273319
+
+Gain at 0.44pi: 1.02128
+Gain at 0.3pi: 0.0538863
+Gain at 0.7pi: 0.0507166
+Bandwidth for L = 40: 0.131947
+
 </pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <img vspace="5" hspace="5" src="main_02.png" alt=""> <img vspace="5" hspace="5" src="main_03.png" alt=""> <h2 id="5">c) Comment on the selectivity when L = 10</h2><pre class="codeinput"><span class="comment">%When the length of the filter is 10 the gain at wc = 0.548 dB and at</span>
 <span class="comment">% w = 0.3*pi g = 0.142 dB and w = 0.7*pi g = 0.143 dB therefore supressing</span>
 <span class="comment">% the signal at these frequencies. This is due to the bandpass filter we</span>
@@ -177,9 +188,8 @@ Length = 10;
    HH4 = passband(Length,wc);
    gain = abs(HH4(301))/abs(HH(301));
 <span class="keyword">end</span>
-disp(Length);
-</pre><pre class="codeoutput">    28
-
+fprintf(<span class="string">'Length of filter required to reduce 0.3pi by a factor of 10: %g\n'</span>, Length);
+</pre><pre class="codeoutput">Length of filter required to reduce 0.3pi by a factor of 10: 28
 </pre><h2 id="7">D) Any frequency component satisfying 0.7*pi &lt;= <tt>w</tt> &lt;= pi will be reduced by a factor of 10</h2><pre class="codeinput">gains = 1;
 Length2 = 10;
 <span class="keyword">while</span> gains &gt; 0.1
@@ -188,10 +198,12 @@ Length2 = 10;
    HH5 = passband(Length2,wc);
    gains = abs(HH5(701))/abs(HH(701));
 <span class="keyword">end</span>
+fprintf(<span class="string">'Length of filter required to reduce 0.7pi by a factor of 10: %g\n'</span>, Length2);
+fprintf(<span class="string">'\n'</span>);
+fprintf(<span class="string">'Therefore the minium necessary filter length is: %g\n'</span>, Length);
+</pre><pre class="codeoutput">Length of filter required to reduce 0.7pi by a factor of 10: 23
 
-disp(Length2);
-</pre><pre class="codeoutput">    23
-
+Therefore the minium necessary filter length is: 28
 </pre><h2 id="8">E) Using sum of sinusiods filter</h2><pre class="codeinput">nn = 0:1:100;
 <span class="comment">%sinusoid</span>
 xn = 5*cos(0.3*pi.*nn)+22*cos((0.44*pi.*nn)-(pi/3))+22*cos((0.7*pi.*nn)-(pi/4));
@@ -232,7 +244,7 @@ ww = 0:0.001*pi:pi;
 frequencyResponse = freqz(hn, 1, ww);
 
 <span class="keyword">end</span>
-</pre><img vspace="5" hspace="5" src="main_05.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="main_05.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 clear;
 close all;
@@ -254,16 +266,17 @@ w2 = 0.3*pi;
 w3 = 0.7*pi;
 
 %finding gain at the specified places
-fprintf('Gain at w1=%g: %g\n', w1, abs(HH(441)));
-fprintf('Gain at w1=%g: %g\n', w2, abs(HH(301)));
-fprintf('Gain at w1=%g: %g\n', w3, abs(HH(701)));
+fprintf('Gain at 0.44pi: %g\n', abs(HH(441)));
+fprintf('Gain at 0.3pi: %g\n', abs(HH(301)));
+fprintf('Gain at 0.7pi: %g\n', abs(HH(701)));
 
 %% B) Find the band width and repeat with L = 20, L = 40
 %find all locations that have a gain > 0.707*Hmac
 locations = find(abs(HH) > 0.707*Hmax);
 found = ww(locations);
-fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found), ', '));
-
+%fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found), ', '));
+bandw = found(end) - found(1);
+fprintf('Bandwidth for L = 10: %g\n', bandw);
 
 % B) cont. Repeat above for L = 20 and L = 40
 
@@ -275,15 +288,18 @@ Hmax2 = max(abs(HH2));
 
 
 %finding gain at the specified places
-fprintf('Gain at w1=%g: %g\n', w1, abs(HH2(441)));
-fprintf('Gain at w1=%g: %g\n', w2, abs(HH2(301)));
-fprintf('Gain at w1=%g: %g\n', w3, abs(HH2(701)));
+fprintf('\n');
+fprintf('Gain at 0.44pi: %g\n', abs(HH2(441)));
+fprintf('Gain at 0.3pi: %g\n', abs(HH2(301)));
+fprintf('Gain at 0.7pi: %g\n', abs(HH2(701)));
+
 
 %find all locations that have a gain > 0.707*Hmac
 locations2 = find(abs(HH2) > 0.707*Hmax2);
 found2 = ww(locations2);
-fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found2), ', '));
-
+%fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found2), ', '));
+bandw20 = found2(end) - found2(1);
+fprintf('Bandwidth for L = 20: %g\n', bandw20);
 
 
 L3 = 40; %Length of filter
@@ -294,14 +310,18 @@ Hmax3 = max(abs(HH3));
 
 
 %finding gain at the specified places
-fprintf('Gain at w1=%g: %g\n', w1, abs(HH3(441)));
-fprintf('Gain at w1=%g: %g\n', w2, abs(HH3(301)));
-fprintf('Gain at w1=%g: %g\n', w3, abs(HH3(701)));
+fprintf('\n');
+fprintf('Gain at 0.44pi: %g\n', abs(HH3(441)));
+fprintf('Gain at 0.3pi: %g\n', abs(HH3(301)));
+fprintf('Gain at 0.7pi: %g\n', abs(HH3(701)));
 
 %find all locations that have a gain > 0.707*Hmac
 locations3 = find(abs(HH3) > 0.707*Hmax3);
 found3 = ww(locations3);
-fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found3), ', '));
+%fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found3), ', '));
+bandw40 = found3(end) - found3(1);
+fprintf('Bandwidth for L = 40: %g\n', bandw40);
+fprintf('\n');
 
 %B) cont. Plot Freq response for L = 10, L = 20, L = 40
 figure(1)
@@ -343,7 +363,7 @@ while gain > 0.1
    HH4 = passband(Length,wc);
    gain = abs(HH4(301))/abs(HH(301));
 end
-disp(Length);
+fprintf('Length of filter required to reduce 0.3pi by a factor of 10: %g\n', Length);
 %% D) Any frequency component satisfying 0.7*pi <= |w| <= pi will be reduced by a factor of 10
 
 gains = 1;
@@ -354,10 +374,9 @@ while gains > 0.1
    HH5 = passband(Length2,wc);
    gains = abs(HH5(701))/abs(HH(701));
 end
-
-disp(Length2);
-
-
+fprintf('Length of filter required to reduce 0.7pi by a factor of 10: %g\n', Length2);
+fprintf('\n');
+fprintf('Therefore the minium necessary filter length is: %g\n', Length);
 %% E) Using sum of sinusiods filter 
 nn = 0:1:100;
 %sinusoid
