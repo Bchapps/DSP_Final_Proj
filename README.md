@@ -19,9 +19,11 @@ THIS FILE SHOULD RUN WITH NO FURTHER INSTRUCTION REQUIRED. AN HTML VIEW IS ALSO 
 ### Simple Bandpass Filter Design: 3.2
 An L-point averaging filter is designed to pass a certain band of frequencies and stop all others. The passband is centered at the desired frequency to pass, labled as omega_c, and the width of the pass band is inversely propotional to the length, or L, of the filter shown by h[n] = 2/L*cos(omegac*n). 
 
-We desire to pass frequencies around 0.44pi with a filter length of 10. Looking at the gain at three different frequencies we see that we get 0.284, 1.096, and 0.286 for 0.3pi, 0.44pi, and 0.7pi respectively. This shows we have passed the desired frequency of 0.44pi and lowered the magnitude of the rest of the frequency. We see a bandwith of 0.509 for a 10 point averaging filter. Then we repeat the process with two different filters with lengths of 20 and 40. The graphs and calculated bandwidths show that the bandwidth is inversely proportional to the lenght of the filter.
+We desire to pass frequencies around 0.44pi with a filter length of 10. Looking at the gain at three different frequencies we see that we get 0.284, 1.096, and 0.286 for 0.3pi, 0.44pi, and 0.7pi respectively. This shows we have passed the desired frequency of 0.44pi and lowered the magnitude of the rest of the frequency. We see a bandwith of 0.509 for a 10 point averaging filter. Then we repeat the process with two different filters with lengths of 20 and 40. The graphs and calculated bandwidths show that the bandwidth is inversely proportional to the length of the filter.
 
+We desired frequncies at 0.3pi and 0.7pi to be reduced by a factor of 10. Seeing that our base filter length of 10 doesn't reduce the gain enough, we started at 10 and used a loop for 0.3pi and 0.7pi until we got a desired gain of 0.1. We ended up with two different filter lenghts. A length of 28 is required for 0.3pi and a length of 23. This means to reduce both frequences by at least a factor of 10, we need a minimal length of 28.
 
+We then used a convolution to put the signal from the question above in our filter. The output shows that there is mainly one frequency left after the input is filtered. If we replace the input with H(e^jw), the convolution will only have a large magnitude when the frequencies near the desired frequency. The frequency spectrum of the output signals shows that the largest magnitude are those around 0.44pi.
 
 ## DLTI GUI and Nulling Filters: Lab S-5 -- 2 Lab Exercise
 ### Removing Interference from a Speech Signal: 2.3
