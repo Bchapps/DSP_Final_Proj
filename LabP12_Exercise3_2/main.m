@@ -18,16 +18,17 @@ w2 = 0.3*pi;
 w3 = 0.7*pi;
 
 %finding gain at the specified places
-fprintf('Gain at w1=%g: %g\n', w1, abs(HH(441)));
-fprintf('Gain at w1=%g: %g\n', w2, abs(HH(301)));
-fprintf('Gain at w1=%g: %g\n', w3, abs(HH(701)));
+fprintf('Gain at 0.44pi: %g\n', abs(HH(441)));
+fprintf('Gain at 0.3pi: %g\n', abs(HH(301)));
+fprintf('Gain at 0.7pi: %g\n', abs(HH(701)));
 
 %% B) Find the band width and repeat with L = 20, L = 40
 %find all locations that have a gain > 0.707*Hmac
 locations = find(abs(HH) > 0.707*Hmax);
 found = ww(locations);
-fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found), ', '));
-
+%fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found), ', '));
+bandw = found(end) - found(1);
+fprintf('Bandwidth for L = 10: %g\n', bandw);
 
 % B) cont. Repeat above for L = 20 and L = 40
 
@@ -39,15 +40,18 @@ Hmax2 = max(abs(HH2));
 
 
 %finding gain at the specified places
-fprintf('Gain at w1=%g: %g\n', w1, abs(HH2(441)));
-fprintf('Gain at w1=%g: %g\n', w2, abs(HH2(301)));
-fprintf('Gain at w1=%g: %g\n', w3, abs(HH2(701)));
+fprintf('\n');
+fprintf('Gain at 0.44pi: %g\n', abs(HH2(441)));
+fprintf('Gain at 0.3pi: %g\n', abs(HH2(301)));
+fprintf('Gain at 0.7pi: %g\n', abs(HH2(701)));
+
 
 %find all locations that have a gain > 0.707*Hmac
 locations2 = find(abs(HH2) > 0.707*Hmax2);
 found2 = ww(locations2);
-fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found2), ', '));
-
+%fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found2), ', '));
+bandw20 = found2(end) - found2(1);
+fprintf('Bandwidth for L = 20: %g\n', bandw20);
 
 
 L3 = 40; %Length of filter
@@ -58,14 +62,18 @@ Hmax3 = max(abs(HH3));
 
 
 %finding gain at the specified places
-fprintf('Gain at w1=%g: %g\n', w1, abs(HH3(441)));
-fprintf('Gain at w1=%g: %g\n', w2, abs(HH3(301)));
-fprintf('Gain at w1=%g: %g\n', w3, abs(HH3(701)));
+fprintf('\n');
+fprintf('Gain at 0.44pi: %g\n', abs(HH3(441)));
+fprintf('Gain at 0.3pi: %g\n', abs(HH3(301)));
+fprintf('Gain at 0.7pi: %g\n', abs(HH3(701)));
 
 %find all locations that have a gain > 0.707*Hmac
 locations3 = find(abs(HH3) > 0.707*Hmax3);
 found3 = ww(locations3);
-fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found3), ', '));
+%fprintf('Frequencies with abs(H) > 0.707*Hmax: %s\n', join(string(found3), ', '));
+bandw40 = found3(end) - found3(1);
+fprintf('Bandwidth for L = 40: %g\n', bandw40);
+fprintf('\n');
 
 %B) cont. Plot Freq response for L = 10, L = 20, L = 40
 figure(1)
@@ -107,7 +115,7 @@ while gain > 0.1
    HH4 = passband(Length,wc);
    gain = abs(HH4(301))/abs(HH(301));
 end
-disp(Length);
+fprintf('Length of filter required to reduce 0.3pi by a factor of 10: %g\n', Length);
 %% D) Any frequency component satisfying 0.7*pi <= |w| <= pi will be reduced by a factor of 10
 
 gains = 1;
@@ -118,10 +126,9 @@ while gains > 0.1
    HH5 = passband(Length2,wc);
    gains = abs(HH5(701))/abs(HH(701));
 end
-
-disp(Length2);
-
-
+fprintf('Length of filter required to reduce 0.7pi by a factor of 10: %g\n', Length2);
+fprintf('\n');
+fprintf('Therefore the minium necessary filter length is: %g\n', Length);
 %% E) Using sum of sinusiods filter 
 nn = 0:1:100;
 %sinusoid
