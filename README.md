@@ -5,6 +5,9 @@
 ## Getting Started:
 ### Installation
 The programs and files in this repository are intended to be run in Matlab. Ensure that all files downloaded in this repository are within the user's "Current Folder" in the Matlab environment.
+For Chrome users: Select the html file and all the images. Then right click and select open on one of the pictures. The html file  for the pictures to display properly in the html file.
+
+
 ## Frequency Response: Bandpass and Nulling Filters: Lab P-12 -- 3 Lab Exercise
 ### Nulling Filters for Rejection: 3.1 (P_12_Q3_1)
 A nulling filter is designed to null out frequencies of .44pi and .7pi. This is done by taking the coefficients of a simple nulling filter (1, 2*cos(omega), and 1) , and inputting the two frequencies desired to be nulled out in for omega. Now, there are two different nulling filters for two different frequencies. These filters are then cascaded to null both frequencies out. This is done by a convolution. 
@@ -13,8 +16,11 @@ A unfiltered signal is genreated as "xn". This signal is put through the filter 
 
 THIS FILE SHOULD RUN WITH NO FURTHER INSTRUCTION REQUIRED. AN HTML VIEW IS ALSO GENERATED IF RUNNING IT IS NOT DESIRED. 
 
-
 ### Simple Bandpass Filter Design: 3.2
+An L-point averaging filter is designed to pass a certain band of frequencies and stop all others. The passband is centered at the desired frequency to pass, labled as omega_c, and the width of the pass band is inversely propotional to the length, or L, of the filter shown by h[n] = 2/L*cos(omegac*n). 
+
+We desire to pass frequencies around 0.44pi with a filter length of 10. Looking at the gain at three different frequencies we see that we get 0.284, 1.096, and 0.286 for 0.3pi, 0.44pi, and 0.7pi respectively. This shows we have passed the desired frequency of 0.44pi and lowered the magnitude of the rest of the frequency. We see a bandwith of 0.509 for a 10 point averaging filter. Then we repeat the process with two different filters with lengths of 20 and 40. The graphs and calculated bandwidths show that the bandwidth is inversely proportional to the lenght of the filter.
+
 
 
 ## DLTI GUI and Nulling Filters: Lab S-5 -- 2 Lab Exercise
