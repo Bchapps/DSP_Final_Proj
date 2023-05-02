@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>main</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-04-29"><meta name="DC.source" content="main.m"><style type="text/css">
+      --><title>main</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-05-01"><meta name="DC.source" content="main.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -97,10 +97,20 @@ b3 = 1;
 b4 = -2*cos(omega2);
 b5 = 1;
 
+
+
 <span class="comment">% Place coefficients into arrays for convolution:</span>
 coeff1 = [b0, b1, b2];
 coeff2 = [b3, b4, b5];
 convcoeff = conv(coeff1,coeff2); <span class="comment">% Filter coefficients of the equivalent filter.</span>
+
+fprintf(<span class="string">'Filter coefficients of equivalent filter: '</span>);
+convcoeff
+</pre><pre class="codeoutput">Filter coefficients of equivalent filter: 
+convcoeff =
+
+    1.0000   -0.3379    1.7624   -0.3379    1.0000
+
 </pre><h2 id="4">2.3c) Plot the frequency response of the cascaded nulling filter.</h2><pre class="codeinput"><span class="comment">% Convolve initial audio signal with second-order nulling coefficients:</span>
 filt = conv(xxbad, convcoeff);
 w = -pi:(pi/100):pi;
@@ -114,10 +124,11 @@ title(<span class="string">'Frequency Response of Cascaded Filter'</span>, <span
 xlabel(<span class="string">'Normalized Frequency'</span>, <span class="string">'FontSize'</span>, 14);
 ylabel(<span class="string">'Magnitude'</span>, <span class="string">'FontSize'</span>, 14);
 
+fprintf(<span class="string">'The nulls are seen at (1.7452, 0) and (1.2213, 0) along with (-1.7452, 0) and (-1.2213, 0) which are consistent the omega1 and omega2 values calculated in part b.'</span>);
 <span class="comment">% c) The nulls are found at (1.7452, 0) and (1.2213, 0)</span>
 <span class="comment">% along with (-1.7452, 0) and (-1.2213, 0) which are consistent</span>
 <span class="comment">% the omega1 and omega2 values calculated in part b above.</span>
-</pre><img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="5">2.3d) Process xxbad through the nulling filters. Indicate where the</h2><p>nulls are found.</p><pre class="codeinput">figure(3) <span class="comment">% Extra graph to look at Audio Signal Frequency Response</span>
+</pre><pre class="codeoutput">The nulls are seen at (1.7452, 0) and (1.2213, 0) along with (-1.7452, 0) and (-1.2213, 0) which are consistent the omega1 and omega2 values calculated in part b.</pre><img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="5">2.3d) Process xxbad through the nulling filters. Indicate where the</h2><p>nulls are found.</p><pre class="codeinput">figure(3) <span class="comment">% Extra graph to look at Audio Signal Frequency Response</span>
 H = freqz(filt, 1, w);
 A = freqz(xxbad, 1, w);
 plot(w, abs(H));
@@ -129,9 +140,10 @@ figure(4);
 spectrogram(filt) <span class="comment">% Final Spectrogram. The two large sinusoids are now gone.</span>
 <span class="comment">%We can compare this to the input audio signal in figure 1: "Initial</span>
 <span class="comment">%Spectrogram" and verify that the nulling filters operated correctly.</span>
+fprintf(<span class="string">'The two large sinusoids are now gone. We can compare this to the input audio signal in figure 1: "Initial Spectrogram" and we can confirm that the nulling filters have operated correctly.'</span>);
 title(<span class="string">'Filtered Spectrogram'</span>, <span class="string">'FontSize'</span>, 14)
 set(gca, <span class="string">'FontSize'</span>, 14)
-</pre><img vspace="5" hspace="5" src="main_03.png" alt=""> <img vspace="5" hspace="5" src="main_04.png" alt=""> <h2 id="6">Extras: Final filtered sound. Initial and final frequency response of audio</h2><pre class="codeinput">pause(4) <span class="comment">% 4 second delay so you can hear the before and after of the audio</span>
+</pre><pre class="codeoutput">The two large sinusoids are now gone. We can compare this to the input audio signal in figure 1: "Initial Spectrogram" and we can confirm that the nulling filters have operated correctly.</pre><img vspace="5" hspace="5" src="main_03.png" alt=""> <img vspace="5" hspace="5" src="main_04.png" alt=""> <h2 id="6">Extras: Final filtered sound. Initial and final frequency response of audio</h2><pre class="codeinput">pause(4) <span class="comment">% 4 second delay so you can hear the before and after of the audio</span>
 sound(filt) <span class="comment">% Final audio filtered through FIR filter.</span>
 
 figure(5)
@@ -196,11 +208,15 @@ b3 = 1;
 b4 = -2*cos(omega2);
 b5 = 1;
 
+
+
 % Place coefficients into arrays for convolution:
 coeff1 = [b0, b1, b2]; 
 coeff2 = [b3, b4, b5];
 convcoeff = conv(coeff1,coeff2); % Filter coefficients of the equivalent filter.
 
+fprintf('Filter coefficients of equivalent filter: ');
+convcoeff
 %% 2.3c) Plot the frequency response of the cascaded nulling filter.
 
 % Convolve initial audio signal with second-order nulling coefficients:
@@ -216,6 +232,7 @@ title('Frequency Response of Cascaded Filter', 'FontSize', 14);
 xlabel('Normalized Frequency', 'FontSize', 14);
 ylabel('Magnitude', 'FontSize', 14);
 
+fprintf('The nulls are seen at (1.7452, 0) and (1.2213, 0) along with (-1.7452, 0) and (-1.2213, 0) which are consistent the omega1 and omega2 values calculated in part b.');
 % c) The nulls are found at (1.7452, 0) and (1.2213, 0) 
 % along with (-1.7452, 0) and (-1.2213, 0) which are consistent
 % the omega1 and omega2 values calculated in part b above.
@@ -235,6 +252,7 @@ figure(4);
 spectrogram(filt) % Final Spectrogram. The two large sinusoids are now gone.
 %We can compare this to the input audio signal in figure 1: "Initial
 %Spectrogram" and verify that the nulling filters operated correctly.
+fprintf('The two large sinusoids are now gone. We can compare this to the input audio signal in figure 1: "Initial Spectrogram" and we can confirm that the nulling filters have operated correctly.');
 title('Filtered Spectrogram', 'FontSize', 14)
 set(gca, 'FontSize', 14)
 
